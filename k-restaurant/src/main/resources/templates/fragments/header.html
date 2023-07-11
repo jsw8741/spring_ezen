@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	  
+	<header class="header_section">
+        <div class="container">
+          <nav class="navbar navbar-expand-lg custom_nav-container">
+            <a class="navbar-brand" href="/">
+              <span> K-Restaurant </span>
+            </a>
+
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class=""> </span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mx-auto">
+              	<li class="has-children nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                 <!--  <a class="nav-link" href="#">관리자 메뉴</a> -->
+                 <div>
+                 <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: black;">
+                  관리자메뉴
+                 </button>
+                 <ul class="dropdown-menu" name="key" id="filterList" >
+                  <li class="nav-item"><a class="dropdown-item nav-link" href="#" data-value=1>제목</a></li>
+                  <li class="nav-item"><a class="dropdown-item nav-link" href="#" data-value=2>작성자</a></li>
+                  <li class="nav-item"><a class="dropdown-item nav-link" href="#" data-value=3>제목+작성자</a></li>
+                </ul> 
+                </div>
+                 <!-- <ul class="navbar-nav mx-auto dropdown">
+                    <li class="nav-item"><a class="nav-link" href="/admin/item/new">상품등록</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/admin/items">상품관리</a></li>                    
+                 </ul> -->
+                </li>
+                
+                <li class="nav-item"><a class="nav-link" href="/">Home <span class="sr-only"></span></a></li>
+                <li class="nav-item"><a class="nav-link" href="/menu/list">Menu</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="/members/login" sec:authorize="isAnonymous()">로그인</a></li>
+                <li class="nav-item"><a class="nav-link" href="/members/logout" sec:authorize="isAuthenticated()">로그아웃</a></li>
+              </ul>
+              <div class="user_option">
+              	
+              	
+              	
+                <a href="" class="user_link">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                </a>
+				<!-- <a href="#" class="icons-btn d-inline-block js-search-open"><span class="fa fa-search"></span></a> -->
+                <a href="book.html" class="order_online"> Reservation </a>
+              
+              	<!-- <form class="form-inline">
+                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+              </form> -->
+              </div>
+            </div>
+          </nav>
+        </div>
+        <script type="text/javascript">
+	    	/* const menu = document.querySelectorAll(".nav-item");
+	    	for(let i = 0; i < menu.length; i++) {
+	            menu[i].addEventListener("click", act);
+	            function act(){
+	                 for(let j = 0; j < menu.length; j++){
+	                      menu[j].setAttribute("class", "nav-item"); // 추가하고자 하는 class명
+	                      //menu[j].removeAttribute("class", "active"); // 추가하고자 하는 class명
+	                 }
+	                 menu[i].setAttribute("class", "nav-item active");
+	            }
+	       	}  */ 
+	    </script>
+      </header>
+</html>

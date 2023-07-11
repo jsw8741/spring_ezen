@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link th:href="@{css/style.css}" rel="stylesheet">
+</head>
+<body>
+	<div class="wrap">
+		<div class="index_box">
+			<div class="logo">
+				<h1>이젠 게장</h1>
+				<div class="logo_img">
+					<img src="/img/logo.PNG" alt="로그 이미지" />
+				</div>
+			</div>
+
+			<div class="select-group">
+					<div class="select">
+						<a href="login?status=회원">회원</a>
+					</div>
+					<div class="select">
+						<a href="shop?status=gest">비회원</a>
+					</div>
+					<div class="select">
+						<a href="login?status=관리자">관리자</a>
+					</div>
+					<div class="select">
+						<a href="join">회원가입</a>
+					</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

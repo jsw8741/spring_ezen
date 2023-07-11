@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<link rel="stylesheet" type="text/css" href="css/shop.css"/>
+
+<div class="wrap">
+<div id="bbsList">
+	<div id="bbsList_list">
+		<div class="logo_box">
+			<img alt="logo" src="/img/logo.PNG" width="169"/>
+		</div>
+		
+		<div id="leftHeader">
+				<form action="/shop" method="post" name="searchForm" class="form">
+					<select name="searchKey" class="selectField">
+						<option value="name">상품명</option>
+					</select> 
+					<input type="text" name="searchValue" class="textField" /> 
+					<input type="button" value=" 검 색 " class="btn2" onclick="sendIt();" />
+					
+					<input type="hidden" name="status" th:value="${status}" />
+					<input th:if="${status.toString().equals('회원')}" type="hidden" name="member_id" th:value="${member_id}"/>
+					<input th:if="${status.toString().equals('회원')}" type="hidden" name="member_pw" th:value="${member_pw}"/>
+					<input th:if="${status.toString().equals('회원')}" type="hidden" name="member_no" th:value="${member_no}"/>
+				</form>
+			</div>
+		
+					<div class="add" th:if="${status.toString().equals('관리자')}">
+						<a th:href="@{created(status = ${status})}">상품등록</a>
+					</div>
+					
+					<div class="add" th:if="${status.toString().equals('회원')}">
+						<a th:href="@{mypage(status = ${status}, member_no = ${member_no})}">마이페이지</a>
+						<input type="hidden" name="member_id" th:value="${member_id}"/>
+						<input type="hidden" name="member_pw" th:value="${member_pw}"/>
+					</div>
+					
+					<div class="add" th:if="${status.toString().equals('gest')}">
+						<a th:href="@{join}">회원가입</a>
+					</div>
+
+		<table class="list_box">
+			<thead id="title">
+				<tr>
+					<th class="no">번호</th>
+					<th class="name">상품명</th>
+					<th class="img">이미지</th>
+					<th class="price">가격(3kg)</th>
+				</tr>
+			</thead>	
+			
+			<tbody id="lists">
+				<tr th:if="${#lists.size(lists)} > 0" th:each="product:${lists}">
+					<td class="no" th:text="${product.no}"></td>
+					<td class="name" th:text="${product.name}"></td>
+					<td class="img"><img th:src="@{${product.img}}" /></td>
+					<td class="price" th:text="${product.price}"></td>
+				</tr>
+
+				<tr th:if="${#lists.size(dataCount)} > 0">
+					<td colspan="5" id="footer"><a th:utext="${pageIndexList}"></a>
+					<input type="hidden" name="member_no" th:value="${member_no}" />
+					</td>
+				</tr>
+
+				<tr th:if="${#lists.size(dataCount)} <= 0">
+					<td colspan="5">등록된 게시물이 없습니다.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</div>
+
+	<script th:inline="javascript">
+	function sendIt(){
+		var f = document.searchForm;
+		var str = f.searchValue.value;
+		str = str.trim();
+		
+		if(!str){
+			alert("검색어를 입력하세요.");
+			f.searchValue.focus();
+			return;
+		}
+
+		f.submit();
+	}
+	</script>
+</th:block>
+</html>

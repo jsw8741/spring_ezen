@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project_crab.dao.CrabDao">
+	<select id="getProductList" parameterType="map" resultType="product">
+		select * from (
+                select rownum rno, data.*
+                from (select *
+                      from product where ${searchKey} like '%' || #{searchValue} || '%'
+                      order by no
+                      ) data
+                      <![CDATA[          
+			              ) where rno >= #{start} and rno <= #{end}
+                      ]]>
+	</select>
+	
+	<select id="getDataCount" parameterType="map" resultType="int">
+		select nvl(count(*), 0) from product where ${searchKey} like '%' || #{searchValue} || '%'
+	</select>
+	
+	<select id="getManager_login" parameterType="map" resultType="Manager">
+		select * from crab_manager where manager_id = #{id} and manager_pw = #{pw}
+	</select>
+	
+	<select id="getMember_login" parameterType="map" resultType="Member">
+		select * from crab_member where member_id = #{id} and member_pw = #{pw}
+	</select>
+	
+	<insert id="insert_product" parameterType="product">
+		insert into product(no, name, price) values(crab_product_seq.nextval, #{name}, #{price})
+	</insert>
+	
+	<insert id="insert_mem" parameterType="Member">
+		insert into crab_member values(crab_members_seq.nextval, #{member_id}, #{member_pw}, #{member_name}, #{member_email}, #{member_phone}, #{member_address})
+	</insert>
+	
+	<select id="getMypage" parameterType="int" resultType="Member">
+		select * from crab_member where member_no = #{member_no}
+	</select>
+	
+	<update id="updateData" parameterType="Member">
+		update crab_member set member_name = #{member_name}, member_email = #{member_email}, member_phone = #{member_phone}, member_address = #{member_address} where member_no = #{member_no}
+	</update>
+	
+	<delete id="deleteMem" parameterType="int">
+		delete crab_member where member_no = #{member_no}
+	</delete>
+</mapper>

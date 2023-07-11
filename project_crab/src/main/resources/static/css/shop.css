@@ -1,0 +1,129 @@
+@charset "UTF-8";
+
+* {
+	margin: 0 auto;
+	padding: 0;
+}
+
+html, body {
+    position: relative;
+    min-height: 100vh;
+    background-color: #E1E8EE;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Fira Sans", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+	text-align: center;
+}
+
+img{
+	height: 150px;
+}
+
+.wrap {
+    background-color: #747474;
+    border-radius: 15px;
+    height: 1100px;
+    width: 1200px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.header {
+	width:1200px !important;
+}
+
+#leftHeader{
+	float:left;
+	width:345px;
+	text-align:center;
+	padding-left: 45px;	
+}
+
+
+input, select{
+	height: 25px;
+	border: none;
+}
+
+.btn2{
+
+}
+
+.add{
+	width: 150px;
+	height:10px;
+	font-size: 20px;
+	padding-left: 825px;
+}
+
+a{
+	text-decoration: none;
+	color: black;
+}
+
+a:hover, a:active {
+	font-size: 16pt;
+	color: white;
+	text-decoration: none;
+}
+
+#bbsList {
+	position: absolute;
+    top: 15%;
+    left: 8%;
+    width: 65%;
+    z-index: 5;
+    -webkit-transition: all .3s ease;
+	text-align:center;
+	overflow: visible;
+}
+
+.logo_box{
+	
+	padding-left: 240px;
+	height: 150px;
+}
+
+.logo_box > img{
+	border-radius: 80%;
+	width: 120px;
+	height:120px;
+}
+
+.title_box{
+	margin-bottom: 20px;
+}
+
+#title{
+	height: 100px;
+}
+
+.list_box{
+	width:1000px;
+	height:100px;
+	margin:0 auto;
+	font-size: 25px;
+}
+#bbsList_list{
+	height: 30px;
+}
+#bbsList_list .no {width:20%;}
+#bbsList_list .name {width:20%;}
+#bbsList_list .img {width:40%;}
+#bbsList_list .price {width:20%;}
+
+img{
+	width:250px;
+	margin:0 auto;
+	text-align:left;
+}
+
+
+#footer{
+	height: 50px;
+	font-size: 25px;
+}

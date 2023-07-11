@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout2}">
+
+<th:block layout:fragment="css">
+	<link rel="stylesheet" type="text/css" href="css/mypage.css" />
+</th:block>
+	
+<div layout:fragment="content">
+	
+	<form action="check" method="post" name="myForm">
+		<div class="form-structor">
+	  		<div class="signup">
+	  		<div class="h_box">
+	  		<span><img class="logo" alt="logo" src="/img/logo.PNG" width="100"/></span>
+	   	 	<h2 class="form-title" id="signup">마이페이지</h2>
+	  	</div>
+	    
+	    <div class="form-holder">
+	      <hr>
+			<ul style="height: 250px;line-height: 40px;">
+				<li th:text="'회원번호: ' + ${mem.member_no}"></li>
+				<li th:text="'아이디: ' + ${mem.member_id}"></li>
+				<li th:text="'이름: ' + ${mem.member_name}"></li>
+				<li th:text="'이메일: ' + ${mem.member_email}"></li>
+				<li th:text="'전화번호: ' + ${mem.member_phone}"></li>
+				<li th:text="'주소: ' + ${mem.member_address}"></li>
+			</ul>
+			<hr>
+	    </div>
+
+	    <div class="bt_wrap">
+			<input type="hidden" name="status" th:value="${status}"/>
+			<input type="hidden" name="member_no" th:value="${mem.member_no}"/>
+			<input type="hidden" name="id" th:value="${mem.member_id}"/>
+			<input type="hidden" name="pw" th:value="${mem.member_pw}"/>
+																																
+			<input type="button" value=" 수정 " class="submit-btn" th:if="${#strings.isEmpty(errorMessage)}" th:onclick="|location.href='updatePage?status=@{${status}}&member_no=@{${mem.member_no}}'|"/>
+			<input type="button" value=" 탈퇴 " class="submit-btn" th:if="${#strings.isEmpty(errorMessage)}" onclick="remove();"/>
+			<input type="button" value=" 뒤로가기 " class="submit-btn" th:if="${#strings.isEmpty(errorMessage)}" onclick="back();"/>		
+		</div>
+	  </div>
+	</div>
+	
+	</form>
+</div>
+	
+	<th:block layout:fragment="script">
+		<script th:inline="javascript">
+		function back(){
+			var f = document.myForm;
+			f.submit();
+		}
+		
+		function remove(){
+			var f = document.myForm;
+			var check = confirm("정말 탈퇴하시겠습니까??");
+			
+			if (check){
+				location.href= 'deleted_ok?member_no=' + f.member_no.value;				
+			}else{
+				return;
+			}
+		}
+	</script>
+	</th:block>
+</body>
+</html>

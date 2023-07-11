@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="css/created.css"/>
+</head>
+<body>
+	<div class="board_wrap">
+      <div class="board_title">
+        <img alt="logo" src="/img/logo.PNG" width="100"/>
+        <h2>상품등록<h2>
+      </div>
+      
+      <div class="board_write_wrap">
+       <form action="insert_product" name="frm" method="post">
+        <div class="board_write">
+          <div class="title">
+            <dl>
+              <dt>상품명</dt>
+              <dd><input type="text" name="name" maxlength="50" placeholder="상품명 입력" /></dd>
+            </dl>
+          </div>
+          <div class="info">
+            <dl>
+              <dt>상품가격</dt>
+              <dd><input type="text" name="price" maxlength="10" placeholder="상품가격 입력" /></dd>
+            </dl>
+          </div>
+          
+          <input type="hidden" name="status" th:value="${status}"/>
+        </div>
+        
+       </form>
+        <div class="bt_wrap">
+          <a onclick="chkForm(); return false;" class="on">등록</a>
+          <a th:href="@{shop(status = ${status})}">취소</a>
+        </div>
+      </div>
+    </div>
+    
+    <script type="text/javascript">
+	    function chkForm() {
+	    	var f = document.frm; //form태그
+	    	
+	    	if(f.name.value == '') {
+	    		alert("상품명을 입력해주십시오.");
+	    		f.name.focus();
+	    		return false;
+	    	}
+	    	
+	    	if(f.price.value == '') {
+	    		alert("가격를 입력해주십시오.");
+	    		f.price.focus();
+	    		return false;
+	    	}
+	    	
+	    	f.submit(); //폼태그 전송
+	    }
+	    
+    </script>
+    
+</body>
+</html>

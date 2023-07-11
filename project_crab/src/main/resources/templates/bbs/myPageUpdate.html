@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout2}">
+
+<th:block layout:fragment="css">
+	<link rel="stylesheet" type="text/css" href="css/mypage.css" />
+</th:block>
+
+<div layout:fragment="content">
+	<form name="frm" method="post" action="update">
+	
+		<div class="form-structor">
+	  		<div class="signup">
+	  		<div class="h_box">
+	  		<span><img class="logo" alt="logo" src="/img/logo.PNG" width="100"/></span>
+	   	 	<h2 class="form-title" id="signup">마이페이지</h2>
+	  	</div>
+	
+		<div class="form-holder">
+			<ul style="height: 250px;line-height: 60px;">
+			<li>이름: <input type="text" name="member_name"
+				th:value="${mem.member_name}" />
+			</li>
+			<li>이메일: <input type="text" name="member_email"
+				th:value="${mem.member_email}" /></li>
+			<li>전화번호: <input type="text" name="member_phone"
+				th:value="${mem.member_phone}" /></li>
+			<li>주소: <input type="text" name="member_address"
+				th:value="${mem.member_address}" /></li>
+			</ul>
+		</div>
+		
+			<div class="bt_wrap">
+				<input type="hidden" name="member_no" th:value="${mem.member_no}"/>
+				<input type="hidden" name="status" th:value="${status}"/>
+				<input type="button" value=" 수정하기 " class="submit-btn" onclick="chkInfo();" /> 
+				<input type="button" value=" 수정취소 " class="submit-btn" th:onclick="|location.href='/mypage?status=@{${status}}&member_no=@{${mem.member_no}}'|"/>
+			</div>
+			
+			</div>
+			</div>
+	</form>
+</div>
+
+	<th:block layout:fragment="script">
+		<script th:inline="javascript">
+	function chkInfo(){
+		var f = document.frm;
+		
+		if(f.member_name.value == ''){
+			alert("이름을 입력해주세요.");
+			return false;
+		}
+		
+		if(f.member_email.value == ''){
+			alert("이메일을 입력해주세요.");
+			return false;
+		}
+		
+		if(f.member_phone.value == ''){
+			alert("전화번호를 입력해주세요.");
+			return false;
+		}
+		
+		if(f.member_address.value == ''){
+			alert("주소를 입력해주세요.");
+			return false;
+		}
+		
+		f.submit(); // 폼 태그 전송
+	};
+	</script>
+	</th:block>
+
+</html>
