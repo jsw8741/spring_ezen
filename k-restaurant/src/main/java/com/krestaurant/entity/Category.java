@@ -11,9 +11,8 @@ import lombok.*;
 public class Category {
 	
 	@Id
-	@Column(name="category_num")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long num;
+	@Column(name="category_id")
+	private Long id;
 	
 	@Column(nullable = false, length = 100)
 	private String category;

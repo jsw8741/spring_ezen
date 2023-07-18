@@ -734,21 +734,7 @@
                               />
                             </g>
                           </g>
-                          <g></g>
-                          <g></g>
-                          <g></g>
-                          <g></g>
-                          <g></g>
-                          <g></g>
-                          <g></g>
-                          <g></g>
-                          <g></g>
-                          <g></g>
-                          <g></g>
-                          <g></g>
-                          <g></g>
-                          <g></g>
-                          <g></g>
+                     
                         </svg>
                       </a>
                     </div>
@@ -766,51 +752,33 @@
     
     <section class="book_section layout_padding">
       <div class="container">
-        <div class="heading_container">
-          <h2>Book A Table</h2>
+        <div class="heading_container" sec:authorize="hasAnyAuthority('ROLE_USER')">
+          <h2>예약하기</h2>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6" sec:authorize="hasAnyAuthority('ROLE_USER')">
             <div class="form_container">
-              <form action="">
+              <form role="form" action="/book/new" method="post" th:object="${reservationDto}">
                 <div>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Your Name"
-                  />
+                  <label th:for="bookNm" class="text-black">예약자</label>
+                  <input type="text" class="form-control" placeholder="예약자 성함을 입력해주세요" th:field="*{bookNm}">
+                  <p th:if="${#fields.hasErrors('bookNm')}" th:errors="*{bookNm}" class="fieldError">Incorrect Data</p>
+                </div>
+              
+                <div>
+                  <label th:for="bookPersonnel" class="text-black">인원</label>
+                  <input type="text" placeholder="인원을 입력해주세요" class="form-control" th:field="*{bookPersonnel}">
+                  <p th:if="${#fields.hasErrors('bookPersonnel')}" th:errors="*{bookPersonnel}" class="fieldError">Incorrect Data</p>
                 </div>
                 <div>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Phone Number"
-                  />
-                </div>
-                <div>
-                  <input
-                    type="email"
-                    class="form-control"
-                    placeholder="Your Email"
-                  />
-                </div>
-                <div>
-                  <select class="form-control nice-select wide">
-                    <option value="" disabled selected>
-                      How many persons?
-                    </option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                    <option value="">4</option>
-                    <option value="">5</option>
-                  </select>
-                </div>
-                <div>
-                  <input type="date" class="form-control" />
+                  <label th:for="bookDate" class="text-black">날짜</label>
+                  <input type="datetime-local" class="form-control" th:field="*{bookDate}"/>
+                  <p th:if="${#fields.hasErrors('bookDate')}" th:errors="*{bookDate}" class="fieldError">Incorrect Data</p>
                 </div>
                 <div class="btn_box">
-                  <button>Book Now</button>
+                  <button type="submit">예약</button>
                 </div>
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
               </form>
             </div>
           </div>

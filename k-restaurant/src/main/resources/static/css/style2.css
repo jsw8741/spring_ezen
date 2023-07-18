@@ -30,7 +30,11 @@ ul li {
 }
 
 li>a {
-	color: black;
+	color: #ffffff;
+}
+
+.top_menu{
+	color: #ffffff;
 }
 
 .top_menu:hover {
@@ -671,7 +675,7 @@ a:hover, a:focus {
 
 .header_section {
 	width: 100%;
-	background-color: #ffffff;
+	background-color: #222831;
 	z-index: 800;
 	padding: 8px 0;
 	height: 70px;
@@ -690,7 +694,7 @@ a:hover, a:focus {
 .navbar-brand span {
 	font-weight: bold;
 	font-size: 32px;
-	color: black;
+	color: #ffffff;
 }
 
 .custom_nav-container {
@@ -703,7 +707,7 @@ a:hover, a:focus {
 
 .custom_nav-container .navbar-nav .nav-item .nav-link {
 	padding: 5px 20px;
-	color: black;
+	color: #ffffff;
 	text-align: center;
 	text-transform: uppercase;
 	border-radius: 5px;
@@ -743,7 +747,7 @@ a:hover, a:focus {
 }
 
 .user_option .user_link {
-	color: black;
+	color: #ffffff;
 }
 
 .user_option .user_link:hover {
@@ -776,7 +780,7 @@ a:hover, a:focus {
 .user_option .order_online {
 	display: inline-block;
 	padding: 8px 30px;
-	background-color: black;
+	background-color: #ffbe33;
 	color: #ffffff;
 	border-radius: 45px;
 	-webkit-transition: all 0.3s;

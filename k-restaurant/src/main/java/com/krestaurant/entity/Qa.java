@@ -13,9 +13,9 @@ import lombok.*;
 public class Qa {
 	
 	@Id
-	@Column(name="qa_num")
+	@Column(name="qa_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long num;
+	private Long id;
 	
 	@Lob
 	@Column(nullable = false)
@@ -24,6 +24,6 @@ public class Qa {
 	private LocalDateTime qaDate;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "member_num")
+	@JoinColumn(name = "member_id")
 	private Member member;
 }

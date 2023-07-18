@@ -1,5 +1,9 @@
 package com.krestaurant.entity;
 
+import com.krestaurant.constant.MenuSellStatus;
+import com.krestaurant.dto.MenuFormDto;
+import com.krestaurant.exception.OutOfStockException;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,11 +13,10 @@ import lombok.*;
 @Setter
 @ToString
 public class Menu extends BaseEntity{
-
 	@Id
-	@Column(name="menu_num")
+	@Column(name="menu_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long num;
+	private Long id;
 	
 	@Column(nullable = false)
 	private String menuNm;
@@ -21,11 +24,50 @@ public class Menu extends BaseEntity{
 	@Column(nullable = false)
 	private int price;
 	
+	@Column(nullable = false)
+	private int stockNumber;
+	
 	@Lob
 	@Column(nullable = false)
 	private String menuDetail;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "category_num")
+	@JoinColumn(name = "category_id")
 	private Category category;
+	
+	@Enumerated(EnumType.STRING)
+	private MenuSellStatus menuSellStatus;
+	
+	public void updateMenu(MenuFormDto menuFormDto, Category category) {
+		this.menuNm = menuFormDto.getMenuNm();
+		this.category = category;
+		this.price = menuFormDto.getPrice();
+		this.stockNumber = menuFormDto.getStockNumber();
+		this.menuDetail = menuFormDto.getMenuDetail();
+		this.menuSellStatus = menuFormDto.getMenuSellStatus();
+		
+	}
+	
+	public static Menu createMenu(Category category) {
+		Menu menu = new Menu();
+		menu.setCategory(category);
+		
+	return menu;	
+	}
+	
+	// 재고를 감소시키는 메소드
+		public void removeStock(int stockNumber) {
+			int restStock = this.stockNumber - stockNumber; // 남은 재고 수량
+			
+			if(restStock < 0) {
+				throw new OutOfStockException("메뉴의 재고가 부족합니다. 현재 재고 수량 : " + this.stockNumber);
+			}
+			
+			this.stockNumber = restStock;
+		}
+		
+		// 재고를 증가시키는 메소드
+		public void addStock(int stockNumber) {
+			this.stockNumber += stockNumber;
+		}
 }

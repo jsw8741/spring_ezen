@@ -11,15 +11,15 @@ import lombok.*;
 public class Review extends BaseEntity{
 	
 	@Id
-	@Column(name="review_num")
+	@Column(name="review_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long num;
+	private Long id;
 	
 	@Lob
 	@Column(nullable = false)
 	private String reviewText;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "member_num")
+	@JoinColumn(name = "member_id")
 	private Member member;
 }

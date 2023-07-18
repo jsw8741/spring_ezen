@@ -26,9 +26,9 @@ import lombok.ToString;
 public class Member {
 
 	@Id
-	@Column(name="member_num")
+	@Column(name="member_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long num;
+	private Long id;
 	
 	@Column(nullable = false, length = 255)
 	private String name;
@@ -38,6 +38,9 @@ public class Member {
 	
 	@Column(nullable = false, length = 255)
 	private String password;
+	
+	@Column(nullable = false, length = 50)
+	private String phone; 
 	
 	@Enumerated(EnumType.STRING)
 	private Role role;
@@ -49,7 +52,8 @@ public class Member {
 		member.setName(memberFormDto.getName());
 		member.setEmail(memberFormDto.getEmail());
 		member.setPassword(password);
-		member.setRole(Role.ADMIN);
+		member.setPhone(memberFormDto.getPhone());
+		member.setRole(Role.USER);
 		
 		return member;
 	}
